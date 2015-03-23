@@ -3,3 +3,13 @@
 
 <%= link_to 'Edit', edit_job_path(@job) %> |
 <%= link_to 'Back', jobs_path %>
+<br>
+
+<%= link_to "Add a new candidate", new_job_profile_path(@job)%>
+
+<br>
+	<ul>
+		<% @profiles.each do |profile| %>
+		<li><%= link_to profile.last_name, job_profile_path(@job, profile) %></li>
+		<% end %>
+	</ul>
