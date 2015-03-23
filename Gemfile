@@ -43,3 +43,7 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'pry-rails'
+gem 'httparty'
+gem 'devise'
+gem 'bootstrap-sass'
