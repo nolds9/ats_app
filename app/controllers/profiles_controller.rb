@@ -11,7 +11,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.new(profile_params)
     @profile.job = @job
     if @profile.save
-      redirect_to job_profiles_path(@job, @profile)
+      redirect_to job_path(@job, @profile)
     else
       render :new
     end
@@ -25,7 +25,7 @@ class ProfilesController < ApplicationController
   private
 
   def load_job
-    @job = Job.find(params[:jobs_id])
+    @job = Job.find(params[:job_id])
   end
 
   def profile_params

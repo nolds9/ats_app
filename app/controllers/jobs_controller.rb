@@ -26,9 +26,10 @@ class JobsController < ApplicationController
 
   # POST /jobs
   # POST /jobs.json
+  #merge user_id
   def create
     @job = Job.new(job_params)
-
+    @job.user = current_user
     respond_to do |format|
       if @job.save
         format.html { redirect_to @job, notice: 'Job was successfully created.' }
