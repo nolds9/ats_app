@@ -1,14 +1,41 @@
-<center>
-<h1> Blue Ribbon Applicant Tracking System</h1>
- <p>Keep track of all candidates and jobs here!</p>
+<% if current_user %>
+  <h2>Current Projects</h2>
+  <table style="width: 100%">
+    <thead>
+      <tr>
+        <th>Jobs</th>
+      </tr>
+    </thead>
 
+    <tbody>
+      <% @jobs.each do |job| %>
+        <tr>
+          <td><%= link_to job.name, job_path %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
- <% if !user_signed_in? %>
-  <p>New to Blue Ribbon? <%= link_to 'Sign Up!', new_user_registration_path %></p>
-  <p>Already a member? <%= link_to 'Sign in', new_user_session_path %></p>
+<% else %>
+  <div class="panel">
+    <h1>Share your jobs!</h1>
+    <p>A simple app to track and manage your current jobs and their candidates.</p>
+    <%= link_to "Get started today", new_user_registration_path, :class => "button button-large" %>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="large-8 columns">
+      <h3>Nicholas Olds</h3>
+      <p>
+     	An aspiring web developer, Nicholas has sharpened his skills through General Assembly. This is Nicholas' first forray into the webdev game.
+      </p>
+      <p><a class="" href="http://generalassemb.ly" target="_blank">Learn more</a>.</p>
+    </div>
+    <div class="large-4 columns">
+      <h3>About this app</h3>
+      <p>This is the final project for the GA BEWD class</p>
+    </div>
+  </div>
 <% end %>
-<br>
-<%= link_to 'create new job folder', new_job_path %>
-<%= link_to 'show current jobs', jobs_path %>
-</center>
-

@@ -1,20 +1,115 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>BRATS app</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<center>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+    <title><%= content_for?(:title) ? yield(:title) : "BRATS app" %></title>
 
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
 
-<%= yield %>
+  <body>
+    <div class="row">
+      <div class="large-12 columns">
 
-</center>
-</body>
+        <!-- Navigation -->
+
+        <div class="row">
+          <div class="large-12 columns">
+
+            <nav class="top-bar">
+              <ul class="title-area">
+                <!-- Title Area -->
+                <li class="name">
+                  <h1><a href="/">BRATS Home</a></h1>
+                </li>
+              </ul>
+
+              <section class="top-bar-section">
+                <!-- Right Nav Section -->
+                <ul class="right">
+                  <li class="divider"></li>
+                  <% if current_user %>
+                    <li><%= link_to 'My Jobs', jobs_path %></li>
+                    <li class="divider"></li>
+
+                    <li class="has-dropdown">
+                      <%= link_to current_user.email, '#'%>
+                      <ul class="dropdown">
+                        <li><%= link_to 'Profile', edit_user_registration_path %></li>
+                        <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+                        <li class="divider"></li>
+                      </ul>
+                    </li>
+                  <% else %>
+                    <li><%= link_to 'Login', new_user_session_path %></li>
+                    <li><%= link_to 'Register', new_user_registration_path %></li>
+                  <% end %>
+                </ul>
+              </section>
+            </nav>
+            <!-- End Top Bar -->
+          </div>
+        </div>
+        <!-- End Navigation -->
+
+        <!-- Flash messages -->
+        <div class="row">
+          <div class="large-12 columns">
+            <% if flash[:notice] %>
+              <div data-alert class="alert-box success">
+                <a href="#" class="close">&times;</a>
+                <%= flash[:notice] %>
+              </div>
+            <% end %>
+
+            <% if flash[:alert] %>
+              <div data-alert class="alert-box alert">
+                <a href="#" class="close">&times;</a>
+                <%= flash[:alert] %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <!-- End Flash messages -->
+
+        <!-- Content -->
+        <div class="row">
+          <div class="large-12 columns">
+            <%= yield %>
+          </div>
+        </div>
+        <!-- End Content -->
+
+        <!-- Footer -->
+        <footer class="row">
+          <div class="large-12 columns"><hr />
+            <div class="row">
+              <div class="large-6 columns">
+                <p>&copy;Nicholas Olds</p>
+              </div>
+
+              <div class="large-6 columns">
+                <ul class="inline-list right">
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Twitter</a></li>
+                  <li><a href="#">Facebook</a></li>
+                  <li><a href="#">Etc..</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <!-- End Footer -->
+
+      </div>
+    </div>
+
+    <%= javascript_include_tag "application" %>
+  </body>
+</html>
 </html>

@@ -46,4 +46,7 @@ end
 gem 'pry-rails'
 gem 'httparty'
 gem 'devise'
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
+gem 'zurb-foundation'
+gem 'foundation-rails'
+gem 'simple_form'
