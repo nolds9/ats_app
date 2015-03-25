@@ -1,20 +1,6 @@
 <% if current_user %>
   <h2>Current Projects</h2>
-  <table style="width: 100%">
-    <thead>
-      <tr>
-        <th>Jobs</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @jobs.each do |job| %>
-        <tr>
-          <td><%= link_to job.name, job_path %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <p><%= link_to 'My jobs', jobs_path %></p>
 
 <% else %>
   <div class="panel">
@@ -27,9 +13,9 @@
 
   <div class="row">
     <div class="large-8 columns">
-      <h3>Nicholas Olds</h3>
+      <h3>A GA BEWD Production</h3>
       <p>
-     	An aspiring web developer, Nicholas has sharpened his skills through General Assembly. This is Nicholas' first forray into the webdev game.
+     	This app was built as the final project for General Assembly's Back End Web Development class.
       </p>
       <p><a class="" href="http://generalassemb.ly" target="_blank">Learn more</a>.</p>
     </div>
