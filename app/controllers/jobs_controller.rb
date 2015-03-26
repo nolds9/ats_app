@@ -5,7 +5,12 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    if params[:category].blank?
+      @jobs = Job.all.order("created_at DESC")
+    else
+      @category_id = Category.find_by(name: params[:category]).id
+      @jobs = Job.where(category_id: @category_id).order("created_at DESC")
+    end
   end
 
   # GET /jobs/1
@@ -13,6 +18,7 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
     @profiles = @job.profiles
+    @jobs = Job.all
   end
 
   # GET /jobs/new
@@ -26,8 +32,7 @@ class JobsController < ApplicationController
 
   # POST /jobs
   # POST /jobs.json
-  #merge user_id
-  def create
+    def create
     @job = Job.new(job_params)
     @job.user = current_user
     respond_to do |format|
@@ -73,6 +78,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-     params.require(:job).permit(:name, :company, :description)
+     params.require(:job).permit(:name, :company, :description, :category_id)
     end
 end
